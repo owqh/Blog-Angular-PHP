@@ -1,0 +1,60 @@
+<div class="col-md-12 mt-3">
+	<h1> {{page_title}} </h1>
+	<p  *ngIf="status != 'success'">
+	  Registrate en nuestra plataforma para tener acceso a crear nuevas entradas y mucho mas!!!.
+	</p>
+
+	<!-- Alertas de finalizacion -->
+	<div class="alert alert-success mt-3 col-md-6" *ngIf="status == 'success'">
+		El reistro se ha completado correctamente, <a [routerLink]="['/login']">Inicia sesion ya!</a>
+	</div>
+
+	<div class="alert alert-danger" *ngIf="status == 'error'">
+		El reistro no se ha completado, vuelve a intentarlo mas tarde :( 
+	</div>
+	<!-- Fin alertas -->
+
+	<!-- Formulario para registro -->
+	<form class="col-md-5 ml-0 pl-0" (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+		<div class="form-grop">
+			<label for="name">Nombre</label>
+			<input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z]+" >
+			
+			<!--Validacion del campo, si el nombre es invalido o tocan la caja-->
+			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+				El nombre no es válido!
+			</small>
+		</div>
+		<div class="form-grop">
+			<label for="surname">Apellidos</label>
+			<input type="text" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="user.surname" required pattern="[a-zA-Z]+">
+
+			<!--Validacion del campo, si el Apllido es invalido o tocan la caja-->
+			<small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+				Los apellidos no son válidos!
+			</small>
+		</div>
+		<div class="form-grop">
+			<label for="email">Email</label>
+			<input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+
+			<!--Validacion del campo, si el nombre es invalido o tocan la caja-->
+			<small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+				El correo no es válido :( ingresa uno del tipo sunombre@email.com
+			</small>
+		</div>
+		<div class="form-grop">
+			<label for="password">Contraseña</label>
+			<input type="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required >
+
+			<!--Validacion del campo, si el nombre es invalido o tocan la caja-->
+			<small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+				La contraseña no es valida :( por favor ingresa una!
+			</small>
+		</div>
+		<br>
+
+		<input type="submit" value="Registrame" name="" class="btn btn-success" [disabled]="registerForm.invalid" />
+	</form>
+
+</div>

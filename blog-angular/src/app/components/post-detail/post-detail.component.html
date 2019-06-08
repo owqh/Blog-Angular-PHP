@@ -1,0 +1,76 @@
+<div class="col-md-12 mt-3" *ngIf="!post">
+	Cargando ...
+</div>
+
+<div class="col-md-12 mt-3" *ngIf="post">
+	<!-- titulo del post -->
+	<h1 class="text-center">{{post.title}}</h1>
+	
+	<!-- Fecha, autor del post y botones de editar o eliminar si es el aurtor del post-->
+
+	<div class="container">
+	  <div class="row">
+	    <div class="col">
+	    <div class="avatar_mask float-left mr-3">
+	        <img src="{{url + 'user/avatar/' + post.user.image}}" />
+	    </div>
+	      <p>
+			<a [routerLink]=" ['/mi-perfil', post.user.id] "> {{post.user.name + ' ' + post.user.surname}}</a>
+			<br>{{post.created_at|date: "longDate"}}
+		</p>
+
+	    </div>
+	    <div class="col">
+	     	<p class="text-right">
+	     		<span *ngIf="identity && identity.sub == post.user_id">
+					<a [routerLink]="['/editar-entrada', post.id] " class="btn btn-dark mr-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+					<button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#myModal'+post.id" >
+						  <i class="fa fa-trash" aria-hidden="true"></i> Borrar
+					</button>
+				</span>
+			</p>
+					<!-- The Modal -->
+					<div class="modal" id="{{'myModal'+post.id}}">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+
+					      <!-- Modal Header -->
+					      <div class="modal-header">
+					        <h4 class="modal-title">¿Seguro que quieres borrar esta entrada?</h4>
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      </div>
+
+					      <!-- Modal body -->
+					      <div class="modal-body">
+					        Si haces click en Borrar se eliminara todo el contenido de la entrada: <strong>{{post.title}}</strong>, y no habra forma de que podamos recueperlo :( 
+					       <br><br> <small>Nota: Tambien puedes modificarlo.</small> 
+					      </div>
+
+					      <!-- Modal footer -->
+					      <div class="modal-footer">
+					      	<a (click)="deletePost(post.id)" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-trash" aria-hidden="true"></i> Borrar</a>
+					        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+					      </div>
+
+					    </div>
+					  </div>
+					</div>
+		
+	    </div>
+  	</div>
+	
+
+  	<!-- Imagen del post -->
+				<!--Si existe la imagen -->
+				<div class="post-image-detail w-100" *ngIf="post.image">
+					<img src="{{url + 'post/image/' + post.image}} " class="w-100" alt="{{post.title}}">
+				</div>
+				<!--Si no existe pongo la por defecto-->
+				<div class="post-image-detail w-85 h-60" *ngIf="!post.image">
+					<img src="assets/img/no-img.jpg"  alt="No hay imagen disponible">
+				</div>
+	<!-- Contenido del post -->
+	<p [innerHtml]="post.content" ></p>
+
+
+</div>

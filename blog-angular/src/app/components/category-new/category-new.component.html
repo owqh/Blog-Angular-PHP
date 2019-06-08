@@ -1,0 +1,38 @@
+<div class="col-md-12 mt-3">
+	<h1> {{page_title}} </h1>
+	<p  *ngIf="status != 'success'">
+	  Crea una nueva categoria para el blog.
+	</p>
+	<hr>
+
+	<!-- Alertas de finalizacion -->
+
+	<div class="alert alert-success mt-3 col-md-6" *ngIf="status == 'success'">
+		La categoria se ha creado correctamente :)
+	</div>
+
+	<!--<div class="alert alert-danger" *ngIf="status == 'error'">
+		La categoria no se ha guardado, vuelve a intentarlo mas tarde :( 
+	</div>
+	--><!-- Fin alertas -->
+
+	<!-- Formulario para crear categoria -->
+
+	<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" class="col-md-5">
+		<div class="form-group">
+			<label for="name">Nombre de categoria</label>
+			<input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="category.name" required>
+			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+				El nombre de la categoria no es valido :( 
+			</small>
+			<br>
+
+			<input type="submit" value="Guardar cambios" class="btn btn-success" [disabled]="categoryForm.invalid" >
+		</div>
+	</form>
+
+
+	<!-- Fin formulario -->
+
+	<br>
+</div>

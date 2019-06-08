@@ -1,0 +1,73 @@
+<div class="col-md-12 mt-3">
+	<h1> {{page_title}} </h1>
+	<p  *ngIf="status != 'success'">
+	  Modifica tus datos personales de usuario.
+	</p>
+	<hr>
+
+	<!-- Alertas de finalizacion -->
+	<div class="alert alert-success mt-3 col-md-6" *ngIf="status == 'success'">
+		Los datos se han guardado correctamente :)
+	</div>
+
+	<div class="alert alert-danger" *ngIf="status == 'error'">
+		Los datos no se han guardado, vuelve a intentarlo mas tarde :( 
+	</div>
+	<!-- Fin alertas -->
+
+	<!-- Formulario para ajustes -->
+	<form class="col-md-5 ml-0 pl-0" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)" >
+		<div class="form-grop">
+			<label for="name"><strong>Nombre</strong></label>
+			<input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z]+" >
+			
+			<!--Validacion del campo, si el nombre es invalido o tocan la caja-->
+			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+				El nombre no es válido!
+			</small>
+		</div>
+		<div class="form-grop">
+			<label for="surname"><strong>Apellidos</strong></label>
+			<input type="text" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="user.surname" required pattern="[a-zA-Z]+">
+
+			<!--Validacion del campo, si el Apllido es invalido o tocan la caja-->
+			<small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+				Los apellidos no son válidos!
+			</small>
+		</div>
+		<div class="form-grop">
+			<label for="email"><strong>Email</strong></label>
+			<input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+
+			<!--Validacion del campo, si el nombre es invalido o tocan la caja-->
+			<small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+				El correo no es válido :( ingresa uno del tipo sunombre@email.com
+			</small>
+		</div>
+
+		<div class="form-grop">
+			<label for="description"><strong>Biografia</strong></label>
+			<textarea [froalaEditor]="froala_options" name="description" class="form-control" #description="ngModel" [(ngModel)]="user.description"></textarea>
+		</div>
+		<br>
+		<div class="form-grop">
+			<label for="image"><strong>Avatar</strong></label>
+
+			<div *ngIf="identity && identity.image">
+				<img src="{{ url + 'user/avatar/' + identity.image }}" class="avatar_edit rounded" />
+			</div>
+
+			<angular-file-uploader
+			      [config]="afuConfig"
+			      [resetUpload]=resetVar
+      			  (ApiResponse)="avatarUpload($event)">
+			</angular-file-uploader>
+		</div>
+		
+		<br>
+		<br>
+
+		<input type="submit" value="Guardar cambios" name="" class="btn btn-success" [disabled]="userEditForm.invalid" />
+	</form>
+	<br>
+</div>

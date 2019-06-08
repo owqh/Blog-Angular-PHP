@@ -1,0 +1,57 @@
+<div class="loading" *ngIf="!category">
+	Cargando ...
+</div>
+
+<div class="container-fluid mt-3" *ngIf="category">
+	<h1> {{category.name}} </h1>
+	<hr>
+
+	<br>
+		<div class="loading" *ngIf="!posts">
+			Cargando listado ...
+		</div>
+
+		<div class="alert alert-warning" *ngIf="posts && posts.length == 0">
+			No hay entradas que mostrar en esta categoria. 
+		</div>
+
+		 <!-- Listado de entradas
+		 <post-list [posts]="posts"
+		 			[identity]="identity" 
+		 			[url]="url" >		
+		 </post-list>-->
+
+		 <div class="card-columns" *ngIf="posts && posts.length >= 1">
+		<article class="card w-100" *ngFor="let post of posts">
+			<div class="card-header">
+				<h3>
+					<a [routerLink]="['/entrada', post.id]" >{{post.title}} </a>
+				</h3>
+			</div>
+			<div class="card-body">
+				<!-- Imagen del post -->
+				<!--Si existe la imagen -->
+				<div class="post-image w-100" *ngIf="post.image">
+					<img src="{{url + 'post/image/' + post.image}} " class="w-100" alt="{{post.title}}">
+				</div> 
+				<!--Si no existe pongo la por defecto-->
+				<div class="post-image w-100" *ngIf="!post.image">
+					<img src="assets/img/no-img.jpg " class="w-100" alt="No hay imagen disponible">
+				</div>
+				<div class="description mt-2">
+					<p [innerHtml]="post.description">  </p> 
+				</div>
+			</div>
+			<!-- botones de accion-->
+			<div class="post-buttons mt-3 mb-3 ml-3">
+				<a [routerLink]="['/entrada', post.id] " class="text-muted">Leer mas ...</a>
+			</div>		
+
+			     
+		</article>
+
+	<br>
+	<br>		
+	</div> 
+	<br>
+</div>

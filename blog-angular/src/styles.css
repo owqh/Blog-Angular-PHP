@@ -1,0 +1,128 @@
+/* You can add global styles to this file, and also import other style files */
+.avatar_edit{
+	width: 95px;
+	margin-bottom: 10px;
+}
+
+.avatar_mask{
+	width: 40px;
+	height: 40px; 
+	border-radius: 900px;
+	overflow: hidden;
+}
+
+.avatar_mask img {
+	height: 40px;
+}
+
+.avatar_mask_profile{
+	width: 90px;
+	height: 90px; 
+	border-radius: 900px;
+	overflow: hidden;
+}
+
+.avatar_mask_profile img {
+	height: 90px;
+}
+
+.content{
+	margin: 0;
+	padding: 0;
+	/*display: flex;*/
+	min-height: 85vh;
+	flex-wrap: wrap;
+	padding-bottom: 1rem!important;
+	padding-top: 1rem!important;
+}
+
+.footer{
+		align-self: flex-end;
+	    background-color: #000; 
+	    color: #fff;
+	    line-height: 3;
+	    text-align: center;  
+	    width: 100%;  
+	    padding-bottom: 1rem!important;
+	    padding-top: 1rem!important;
+}
+
+.mt-auto{
+    margin-top: auto!important;
+}
+
+.py3{
+	    padding-bottom: 1rem!important;
+	    padding-top: 1rem!important;
+}
+
+.card-title a {
+	color: #444; 
+	font-weight: bold;
+}
+
+.post-image{
+	border-radius: 8px;
+	max-height: 200px;
+	max-width: 250px;
+	overflow: hidden;
+	display:block;
+	margin:auto;
+	padding-bottom: 1em;
+}
+
+.post-image-detail{
+	border-radius: 10px;
+	margin:  0 auto;
+	display: block;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	align-self: center;
+	padding-bottom: 2em;
+	padding-top: 1em;
+}
+.post-image-detail img{
+	max-width: 700px;
+	max-height: 500px;
+	display:block;
+	margin:auto;
+}
+
+.first-post{
+	max-height: 500px;
+	max-width:100%;
+}
+
+.img-first {
+	height: 400px!important;
+	width: 100%!important;
+}
+
+.second-post{
+	padding-top: 3em!important;
+	max-height: 600px;
+	max-width:100%;
+}
+.img-second {
+	height: 200px!important;
+	width: 100%!important;
+}
+
+.last-post {
+	padding-top: 3em!important;
+}
+
+.img-last {
+	height: 250px!important;
+	width: 100%!important;
+}
+
+
+.categories{
+	font-weight: bold;
+}
+
+.categories a{
+	color: blue;
+}

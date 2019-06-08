@@ -1,0 +1,78 @@
+<!--Contenedor principal -->
+
+
+<!-- Barra de navegacion-->
+<nav class="navbar navbar-expand-lg   navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]=" ['/']">
+    <img src="../assets/img/favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="">
+      NG-BLOG
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]=" ['/inicio'] " >Inicio <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngFor="let category of categories">
+        <a class="nav-link" [routerLink]=" ['/categoria', category.id] ">{{category.name }}</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav navbar-rigth" *ngIf="!identity">
+       <li class="nav-item active">
+        <a class="nav-link" [routerLink]=" ['/login']" >Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]=" ['/registro'] ">Registro</a>
+      </li>
+    </ul>
+
+
+    <ul class="navbar-nav navbar-rigth" *ngIf="identity && identity.name">
+      <li *ngIf="identity && identity.image" class="nav-item">
+        <div class="avatar_mask">
+        <img src="{{ url + 'user/avatar/' + identity.image }}" />
+      </div>
+      </li>
+     <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{identity.name + ' ' + identity.surname}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"[routerLink]=" ['/crear-entrada'] "><i class="fa fa-file" ></i> Crear entrada</a>
+          <a class="dropdown-item" [routerLink]=" ['/crear-categoria'] "><i class="fa fa-list-ul"></i> Crear categoria</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]=" ['/mi-perfil', identity.sub] "><i class="fa fa-user" ></i> Mi perfil</a>
+          <a class="dropdown-item" [routerLink]=" ['/ajustes']"><i class="fa fa-cog"></i> Ajustes</a>
+          <a class="dropdown-item" [routerLink]=" ['/logout/1']"><i class="fa fa-window-close"></i> Cerrar sesión</a>
+        </div>          
+      </li>
+    </ul>
+
+
+    <!-- BARRA DE BUSQUEDA
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+  </div>
+</nav>
+<!-- Fin Barra de navegacion-->
+
+  <!-- Contenido -->
+  <div class="container content"> 
+    <router-outlet></router-outlet>
+   
+</div>
+    <footer class="footer border-top pt-4"> 
+      <div class="container">
+     <p class="text-center text-muted">Hecho con <i class="fa fa-heart"></i> y mucho <i class="fa fa-coffee" aria-hidden="true"></i> por <strong><a href='https://sv.linkedin.com/in/oscarquintanilla?trk=profile-badge' target="_blank" class="text-muted">Oscar Quintanilla</a></strong> &copy; 2019 </p>
+     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+     </div>
+    </footer>
+
+
+<!-- Fin contenedor principal-->

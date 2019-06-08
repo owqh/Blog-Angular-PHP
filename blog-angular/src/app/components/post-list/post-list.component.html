@@ -1,0 +1,134 @@
+<!--
+<div class="card-columns" *ngIf="posts && posts.length >= 1">
+		<article class="card w-100" *ngFor="let post of posts">
+			<div class="card-header">
+				<h3>
+					<a [routerLink]="['/entrada', post.id]" >{{post.title}} </a>
+				</h3>
+			</div>
+			<div class="card-body">-->
+				<!-- Imagen del post -->
+				<!--Si existe la imagen 
+				<div class="post-image w-100" *ngIf="post.image">
+					<img src="{{url + 'post/image/' + post.image}} " class="w-100" alt="{{post.title}}">
+				</div> -->
+				<!--Si no existe pongo la por defecto
+				<div class="post-image w-100" *ngIf="!post.image">
+					<img src="assets/img/no-img.jpg " class="w-100" alt="No hay imagen disponible">
+				</div>
+				<div class="description mt-2">
+					<p [innerHtml]="post.description">  </p> 
+				</div>
+			</div>-->
+			<!-- botones de accion
+			<div class="post-buttons mt-3 mb-3 ml-3">
+				<a [routerLink]="['/entrada', post.id] " class="text-muted">Leer mas ...</a>
+			</div>		
+
+			     
+		</article>
+
+	<br>
+	<hr>
+	<br>		
+	</div> -->
+
+	
+
+	<!-- Cabecera del blog, primer articulo --->
+	<div class="row mb-2 first-post " *ngIf="posts && posts.length >= 1">
+	<div class="card border-0 mb-3"  *ngFor="let post of posts; first as isFirst">
+	  <div class="row no-gutters"  *ngIf="isFirst">
+	    <div class="col-md-8" *ngIf="post.image">
+	      <a [routerLink]="['/entrada', post.id]" ><img src="{{url + 'post/image/' + post.image}} " class="card-img img-first" alt="{{post.title}}"></a>
+	    </div>
+	    <div class="col-md-8" *ngIf="!post.image">
+	      <a [routerLink]="['/entrada', post.id]" ><img src="assets/img/no-img.jpg" class="card-img" alt="No hay imagen disponible"></a>
+	    </div>
+	    <div class="col-md-4">
+	      <div class="card-body">
+	        <h2 class="card-title"><a [routerLink]="['/entrada', post.id]" >{{post.title}}</a></h2>
+	        <p class="card-text" [innerHtml]="post.description" ></p><a [routerLink]="['/entrada', post.id]" class="text-muted">Leer mas ...</a>
+	        <br>
+	         <div class="avatar_mask float-left mr-3">
+			        <img src="{{url + 'user/avatar/' + post.user.image}}" />
+			    </div>
+			    <p>
+					<a [routerLink]=" ['/mi-perfil', post.user.id] "> {{post.user.name + ' ' + post.user.surname}}</a>
+					<br>
+					<small class="text-muted">{{post.created_at|date: "longDate"}}</small>
+				</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</div>
+
+
+	<!-- Sub Cabecera del blog, articulo 2 - 4 --->
+	<div *ngIf="posts && posts.length >= 1">
+	<div class="row card-deck second-post">
+	<div class="card border-0" *ngFor=" let post of posts | slice:1:4; let i=index">
+	  <div class="card border-0" *ngIf="i >= 0 && i <= 3 " >
+	     <div class="" *ngIf="post.image">
+	      <a [routerLink]="['/entrada', post.id]" ><img src="{{url + 'post/image/' + post.image}} " class="card-img img-second" alt="{{post.title}}"></a>
+	    </div>
+	    <div class="" *ngIf="!post.image">
+	     <a [routerLink]="['/entrada', post.id]" ><img src="assets/img/no-img.jpg" class="card-img" alt="No hay imagen disponible"></a>
+	    </div>
+	    <div class="card-body">
+	      <h3 class="card-title"><a [routerLink]="['/entrada', post.id]" >{{post.title}}</a></h3>
+	      <p class="card-text" [innerHtml]="post.description"></p><a [routerLink]="['/entrada', post.id]"  class='text-muted'>Leer mas ...</a>
+	    </div>
+	    <div class="card-footer bg-transparent border-0">
+	    	<div class="avatar_mask float-left mr-3">
+			        <img src="{{url + 'user/avatar/' + post.user.image}}" />
+			</div>
+			    <p>
+					<a [routerLink]=" ['/mi-perfil', post.user.id] "> {{post.user.name + ' ' + post.user.surname}}</a>
+					<br>
+					<small class="text-muted">{{post.created_at|date: "longDate"}}</small>
+				</p>
+	    </div>
+	  </div>
+	  </div>
+	</div>
+	</div>
+	<br>
+
+	<!-- Articulos restantes --->
+		
+	<div class="card col-md-8 border-0 last-post "  *ngIf="posts && posts.length > 4">
+		<div  *ngFor="let post of posts; let i=index">
+			<div *ngIf="i >= 4 ">
+				<hr>
+			    <div class="avatar_mask float-left mr-3">
+			        <img src="{{url + 'user/avatar/' + post.user.image}}" />
+			    </div>
+			      <p>
+					<a [routerLink]=" ['/mi-perfil', post.user.id] "> {{post.user.name + ' ' + post.user.surname}}</a>
+					<br>
+					<small class="text-muted">{{post.created_at|date: "longDate"}}</small>
+				</p>
+
+				
+			     <div class="" *ngIf="post.image">
+			      <a [routerLink]="['/entrada', post.id]" ><img src="{{url + 'post/image/' + post.image}} " class="card-img img-last" alt="{{post.title}}"></a>
+			    </div>
+			    <div class="" *ngIf="!post.image">
+			     <a [routerLink]="['/entrada', post.id]" > <img src="assets/img/no-img.jpg" class="card-img img-last" alt="No hay imagen disponible"></a>
+			    </div>
+			    <div class="card-body">
+			    <!-- Para mandar a llamar las categorias del articulo
+			    	<p class="categories"><a >{{post.category.name}}</a></p>
+			    -->
+			      <h3 class="card-title "><a [routerLink]="['/entrada', post.id]" >{{post.title}}</a></h3>
+			       <p class="card-text" [innerHtml]="post.description"></p><a [routerLink]="['/entrada', post.id]"  class='text-muted'>Leer mas ...</a>
+			    </div>
+
+		 	</div>
+		 </div>
+	 </div>
+	
+
+
